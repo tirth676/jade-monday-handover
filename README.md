@@ -19,6 +19,7 @@ Jade answers every call over the weekend, but on Monday at 8:00 the owner is lef
 | ♻️ **Fill freed slots** | Matches each cancelled slot automatically to a patient who couldn't get in, with urgency ranked first |
 | 👉 **Delegate** | Follow-ups that reception can take on, each with one tap |
 | 📋 **Heads-up** | Notes for the week: anxious patients, upsell interest, priority visits |
+| ✦ **Teach Jade** | Turn any item into a standing rule (typed or spoken). The screen previews how many of today's items Jade will handle herself next weekend, so the Monday list gets shorter every week |
 | 💡 **Insight** | Spots demand patterns, e.g. early-week demand exceeding capacity |
 
 ## Key insight
@@ -46,7 +47,6 @@ Open `index.html` in Chrome. That's all.
 
 ## Roadmap
 - Send real SMS offers through Twilio when "Send offer" is tapped
-- A "Teach Jade" button: the owner writes a rule once, and Jade escalates less each week
 - Generate the summary with an LLM, and use a natural voice via ElevenLabs/Vapi
 - Live integration with the clinic's practice management system (e.g. Cliniko)
 

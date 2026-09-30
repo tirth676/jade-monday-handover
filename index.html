@@ -4,223 +4,274 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jade Monday Handover</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-/* Call Hero brand (callhero.com.au): navy #0A1628, blue #2563EB, #F0F7FF / #E5EAF0, Plus Jakarta Sans + Inter */
+/* Calm "jade" theme: sage + forest green on warm off-white */
 :root{
-  --bg:#F5F8FC; --card:#fff; --ink:#0A1628; --ink-2:#0F1B3D; --muted:#64748B; --faint:#94A3B8; --line:#E5EAF0;
-  --brand:#2563EB; --brand-2:#1D4ED8; --brand-soft:#F0F7FF; --sky:#60A5FA;
-  --red:#DC2626; --red-soft:#FEF2F2; --amber:#B45309; --amber-soft:#FEF3C7; --green:#065F46; --green-soft:#ECFDF5;
-  --display:"Plus Jakarta Sans",system-ui,sans-serif;
-  --shadow:0 1px 2px rgba(15,27,61,.04),0 4px 16px rgba(15,27,61,.04);
+  --bg:#F6F8F5; --card:#fff; --ink:#1C2B24; --muted:#6B7A72; --faint:#9AA79F; --line:#E4EAE4;
+  --forest:#1F3F33; --forest-2:#2A4D40; --sage:#9DC3A6; --sage-2:#B5D3BC; --sage-soft:#EEF4EE; --leaf:#2F6B4F;
+  --red:#B4432F; --red-soft:#FCEDE8; --red-line:#F3CFC5; --amber:#9A5B14; --amber-soft:#FBF1E2; --teal:#3C7A66; --teal-soft:#E8F1EC;
+  --shadow:0 1px 2px rgba(28,43,36,.03),0 6px 18px rgba(28,43,36,.04);
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14.5px;line-height:1.5}
-button{font:inherit;font-family:var(--display);cursor:pointer;border:0;border-radius:10px;transition:background .2s,box-shadow .2s,border-color .2s}
-.wrap{max-width:1200px;margin:0 auto;padding:0 20px 48px}
+body{margin:0;font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14.5px;line-height:1.55}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;transition:background .2s,box-shadow .2s,border-color .2s}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 40px}
+body,.main>*,.kpi,.hero>div{min-width:0}
+body{overflow-x:hidden}
 
 /* NAV */
-.nav{background:#fff;border-bottom:1px solid var(--line)}
-.nav .in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.nav{background:#FBFCFA;border-bottom:1px solid var(--line)}
+.nav .in{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .brand{display:flex;align-items:center;gap:12px}
-.logo{width:34px;height:34px;border-radius:9px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:13px}
-.brand b{font-family:var(--display);font-size:18px;letter-spacing:-.01em}
-.brand .sep{width:1px;height:20px;background:var(--line)}
+.logo{width:34px;height:34px;border-radius:9px;background:var(--forest);color:#fff;display:grid;place-items:center;font-weight:700;font-size:17px}
+.brand b{font-size:21px;font-weight:600;letter-spacing:-.02em}
+.brand b i{color:var(--teal);font-style:normal}
+.brand .sep{width:1px;height:20px;background:var(--line);margin:0 4px}
 .brand span{color:var(--muted);font-size:13.5px}
-.practice{display:flex;align-items:center;gap:10px;text-align:right}
-.practice b{display:block;font-family:var(--display);font-size:13.5px}
-.practice small{color:var(--muted);font-size:12px}
-.practice .ic{width:32px;height:32px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-weight:700}
+.practice{display:flex;align-items:center;gap:10px}
+.practice .ic{width:32px;height:32px;border-radius:50%;background:var(--sage-soft);border:1px solid var(--line);color:var(--forest);display:grid;place-items:center;font-size:16px}
+.practice b{display:block;font-size:13px;font-weight:600}
+.practice small{color:var(--muted);font-size:11.5px}
 
 /* HERO */
-.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:26px 0 18px;flex-wrap:wrap}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:24px 0 16px;flex-wrap:wrap}
 .eyebrow{font-size:12.5px;color:var(--muted);display:flex;gap:6px;align-items:center}
-h1{font-family:var(--display);font-size:30px;font-weight:800;letter-spacing:-.025em;margin:6px 0 4px}
-h1 span{color:var(--faint);font-weight:600}
-.sub{color:var(--muted);margin:0}
-.sub em{font-style:normal;color:var(--brand);font-weight:600}
-.clock{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:260px;box-shadow:var(--shadow)}
-.clock .row{display:flex;justify-content:space-between;gap:16px;font-size:12.5px;color:var(--muted)}
-.clock b{color:var(--ink)}
-.bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:8px}
-.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--sky));transition:width 1s linear}
+h1{font-size:28px;font-weight:600;letter-spacing:-.025em;margin:6px 0 2px}
+h1 span{color:var(--faint);font-weight:500}
+.sub{color:var(--muted);margin:0;font-size:13.5px}
+.sub em{font-style:normal;color:var(--red);font-weight:600}
+.clock{background:#EEF2EE;border-radius:10px;padding:8px 12px;min-width:250px;font-size:12px;color:var(--muted)}
+.clock .row{display:flex;justify-content:space-between;gap:16px}
+.clock b{color:var(--ink);font-weight:600}
+.bar{height:5px;background:#DDE5DE;border-radius:6px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;width:0;background:var(--teal);transition:width 1s linear}
 
 /* KPI STRIP */
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
-.kpi{padding:16px 20px;border-right:1px solid var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:12px}
+.kpi{padding:14px 20px;border-right:1px solid var(--line)}
 .kpi:last-child{border:0}
-.kpi .l{font-size:12.5px;color:var(--muted);font-weight:500;display:flex;gap:6px;align-items:center}
-.kpi .v{font-family:var(--display);font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-top:6px}
-.kpi .v small{font-family:Inter,sans-serif;font-size:12px;font-weight:400;color:var(--muted);margin-left:6px;letter-spacing:0}
-.kpi.red .v{color:var(--red)} .kpi.blue .v{color:var(--brand)}
+.kpi .l{font-size:12.5px;color:var(--ink);display:flex;gap:7px;align-items:center}
+.kpi .l i{font-style:normal;color:var(--muted)}
+.kpi .v{font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-top:8px}
+.kpi .v small{font-size:11.5px;font-weight:400;color:var(--muted);margin-left:8px;letter-spacing:0}
+.kpi.red .v{color:var(--red)}
+.kpi.teal .v{color:var(--teal)}
 
 /* MAIN GRID */
-.main{display:grid;grid-template-columns:340px 1fr;gap:20px;margin-top:20px;align-items:start}
-.side{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px}
+.main{display:grid;grid-template-columns:262px 1fr;gap:20px;margin-top:16px;align-items:start}
+.side{display:flex;flex-direction:column;gap:14px}
 
-/* JADE PANEL — navy with Call Hero blue glow */
-.jade{background:radial-gradient(420px 260px at 20% -10%,rgba(37,99,235,.55),transparent 65%),linear-gradient(180deg,var(--ink-2),var(--ink));color:#fff;border-radius:16px;padding:18px;box-shadow:0 12px 32px rgba(10,22,40,.18)}
-.jhead{display:flex;gap:12px;align-items:center;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1)}
-.avatar{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;font-family:var(--display);font-weight:800;position:relative;flex:none}
-.avatar.talking::after{content:"";position:absolute;inset:-5px;border-radius:14px;border:2px solid var(--sky);animation:pulse 1.1s infinite}
-@keyframes pulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.2);opacity:0}}
-.jhead b{font-family:var(--display);font-size:15px;display:block}
-.jhead small{color:#9CA3AF;font-size:12px}
-.wave{display:flex;gap:3px;justify-content:center;align-items:center;height:44px;margin:14px 0 6px}
-.wave i{width:3px;border-radius:2px;background:var(--sky);opacity:.55;height:30%}
+/* JADE PANEL */
+.jade{background:var(--forest);color:#fff;border-radius:12px;padding:16px 18px 14px}
+.jhead{display:flex;gap:10px;align-items:center;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.12)}
+.avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;font-size:15px;position:relative;flex:none}
+.avatar.talking::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--sage);animation:pulse 1.1s infinite}
+@keyframes pulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.25);opacity:0}}
+.jhead b{font-size:13.5px;font-weight:600;display:block}
+.jhead small{color:#B9CBBF;font-size:11px}
+.wave{display:flex;gap:3px;justify-content:center;align-items:center;height:40px;margin:14px 0 8px}
+.wave i{width:2px;border-radius:2px;background:var(--sage);opacity:.8;height:30%}
 .jade:has(.avatar.talking) .wave i{animation:wv .9s ease-in-out infinite;opacity:1}
-@keyframes wv{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1.6)}}
-#jadeLabel{display:block;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:600;margin-top:6px}
-#jadeText{margin:6px 0 14px;font-size:14px;line-height:1.6;color:#E2E8F0}
-.btn-jade{width:100%;background:var(--brand);color:#fff;padding:12px 14px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-.btn-jade small{font-family:Inter,sans-serif;font-weight:500;opacity:.75;font-size:11.5px}
-.btn-jade:hover{background:var(--brand-2);box-shadow:0 4px 20px rgba(37,99,235,.45)}
-.jbtns{display:flex;gap:8px;margin-top:8px}
-.btn-ghost,.btn-stop{flex:1;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px;font-weight:600;font-size:13px}
+@keyframes wv{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1.5)}}
+.jtitle{font-size:19px;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:4px 0 6px}
+#jadeLabel{display:block;color:var(--sage);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+#jadeText{margin:4px 0 14px;font-size:12.5px;line-height:1.6;color:#DCE7DF;max-height:190px;overflow:auto}
+.btn-jade{width:100%;background:var(--sage);color:var(--forest);padding:11px 12px;font-weight:600;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+.btn-jade small{font-weight:400;opacity:.75;font-size:10.5px}
+.btn-jade:hover{background:var(--sage-2)}
+.jbtns{display:flex;gap:6px;margin-top:6px}
+.btn-ghost,.btn-stop{flex:1;background:transparent;color:#DCE7DF;border:1px solid rgba(255,255,255,.2);padding:8px;font-weight:500;font-size:12.5px}
 .btn-ghost:hover{background:rgba(255,255,255,.06)}
 .btn-stop{display:none}
-.ask{margin-top:12px;display:flex;gap:6px}
-.ask input{flex:1;min-width:0;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;border-radius:10px;padding:10px 12px;font:inherit;font-size:13px;outline:none}
-.ask input::placeholder{color:#94A3B8}
-.ask input:focus{border-color:var(--brand)}
-.ask button{background:rgba(255,255,255,.1);color:#fff;padding:0 11px;font-weight:700}
-.ask button:hover{background:rgba(255,255,255,.18)}
+.ask{margin-top:10px;display:flex;gap:5px}
+.ask input{flex:1;min-width:0;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;border-radius:9px;padding:8px 10px;font:inherit;font-size:12.5px;outline:none}
+.ask input::placeholder{color:#9FB3A6}
+.ask input:focus{border-color:var(--sage)}
+.ask button{background:rgba(255,255,255,.1);color:#fff;padding:0 9px;font-weight:600;font-size:12.5px}
 .mic.listening{background:var(--red)!important}
-.note{display:flex;gap:10px;font-size:12.5px;color:var(--muted);padding:0 4px}
-.note b{color:var(--ink);font-weight:600;display:block}
-.insight{background:var(--brand-soft);border:1px solid #DBEAFE;border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink-2)}
-.insight b{color:var(--brand)}
+.jfoot{display:flex;gap:6px;align-items:center;font-size:11px;color:#B9CBBF;margin-top:10px}
+.note{display:flex;gap:10px;font-size:11.5px;color:var(--muted);padding:0 8px 12px;border-bottom:1px solid var(--line)}
+.note b{color:var(--ink);font-weight:500;display:block}
+.insight{font-size:12px;color:var(--muted);padding:0 8px}
+.insight b{color:var(--ink);font-weight:600}
+
+/* TEACH JADE — rules card */
+.rules{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.rules h3{margin:0;font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:6px}
+.rules h3 .n{margin-left:auto;font-size:11px;font-weight:500;color:var(--muted);background:var(--sage-soft);border-radius:999px;padding:1px 8px}
+.rules p.hint{margin:2px 0 10px;font-size:11.5px;color:var(--muted)}
+.meter{background:var(--sage-soft);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--ink)}
+.meter b{font-size:20px;font-weight:600;color:var(--teal);letter-spacing:-.02em}
+.meter .bar{background:#DDE8DF}
+.meter .bar i{background:var(--teal)}
+.rule{display:flex;gap:8px;align-items:flex-start;font-size:12px;padding:8px 0;border-bottom:1px dashed var(--line);color:var(--ink)}
+.rule:last-child{border:0}
+.rule .dotg{color:var(--teal);flex:none}
+.rule button{margin-left:auto;background:none;color:var(--faint);padding:0 2px;font-size:14px;line-height:1}
+.rule button:hover{color:var(--red)}
+.norules{font-size:12px;color:var(--faint);padding:8px 0 0}
+.reset{background:none;color:var(--faint);font-size:11px;padding:6px 0 0;text-decoration:underline}
 
 /* PRIORITIES */
-.ph{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-.ph h2{font-family:var(--display);font-size:17px;margin:0;letter-spacing:-.01em}
-.ph span{font-size:12.5px;color:var(--muted)}
-.box{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.ph{display:flex;justify-content:space-between;align-items:baseline;margin:2px 0 10px}
+.ph h2{font-size:15px;font-weight:600;margin:0}
+.ph span{font-size:11.5px;color:var(--muted)}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .group{padding:16px 20px;border-bottom:1px solid var(--line)}
 .group:last-child{border:0}
-.gh{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-family:var(--display);font-weight:700;font-size:13.5px}
-.gh .ico{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:12px}
-.gh .n{margin-left:auto;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:1px 9px;font-size:12px;color:var(--muted);font-family:Inter,sans-serif}
-.gh .hint{font-family:Inter,sans-serif;font-weight:400;color:var(--muted);font-size:12.5px}
-.g-red .ico{background:var(--red-soft);color:var(--red)} .g-blue .ico{background:var(--brand-soft);color:var(--brand)}
-.g-amber .ico{background:var(--amber-soft);color:var(--amber)} .g-green .ico{background:var(--green-soft);color:var(--green)}
+.gh{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-weight:600;font-size:13.5px}
+.gh .ico{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px}
+.gh .n{margin-left:auto;background:var(--sage-soft);border-radius:999px;padding:0 9px;font-size:11.5px;color:var(--muted);font-weight:500}
+.gh .hint{font-weight:400;color:var(--muted);font-size:12px}
+.g-red .ico{background:var(--red-soft);color:var(--red)} .g-blue .ico{background:var(--teal-soft);color:var(--teal)}
+.g-amber .ico{background:var(--amber-soft);color:var(--amber)} .g-green .ico{background:var(--sage-soft);color:var(--leaf)}
 
-.card{display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;transition:.25s;position:relative}
+.card{display:grid;grid-template-columns:1fr auto;gap:3px 16px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;transition:.25s;position:relative;background:#fff}
 .card:last-child{margin-bottom:0}
-.card::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--line)}
-.card.red::before{background:var(--red)} .card.amber::before{background:#F59E0B} .card.blue::before{background:var(--brand)}
-.card.red{background:linear-gradient(90deg,var(--red-soft),#fff 60%)}
-.card .t{font-family:var(--display);font-weight:700;display:flex;gap:8px;align-items:center;grid-column:1}
-.card .meta{font-size:12.5px;color:var(--muted);grid-column:1}
-.card .why{grid-column:1;color:#334155;font-size:13.5px}
-.acts{grid-column:2;grid-row:1/span 3;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.acts button{padding:8px 13px;font-size:13px;font-weight:600;background:var(--brand);color:#fff;white-space:nowrap}
-.acts button:hover{background:var(--brand-2);box-shadow:0 4px 14px rgba(37,99,235,.3)}
-.acts button.sec{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.card.red{background:var(--red-soft);border-color:var(--red-line)}
+.card .t{font-weight:600;display:flex;gap:8px;align-items:center;grid-column:1;flex-wrap:wrap}
+.card .meta{font-size:12px;color:var(--muted);grid-column:1}
+.card .why{grid-column:1;color:#3E4C45;font-size:13px}
+.acts{grid-column:2;grid-row:1/span 3;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+.acts button,.slot .go button{padding:7px 12px;font-size:12.5px;font-weight:600;background:var(--forest);color:#fff;white-space:nowrap}
+.acts button:hover,.slot .go button:hover{background:var(--forest-2)}
+.acts button.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .acts button.sec:hover{border-color:var(--faint)}
-.status{grid-column:2;grid-row:1/span 3;font-size:12.5px;font-weight:700;color:var(--green);display:none}
-.card.done{background:var(--green-soft);opacity:.7}
-.card.done::before{background:var(--green)}
+button.teach{background:var(--sage-soft)!important;color:var(--leaf)!important;border:1px solid #D5E5D8!important;font-weight:500!important}
+button.teach:hover{background:#E2EEE4!important}
+.learned{display:none;font-size:10.5px;font-weight:600;color:var(--teal);background:var(--teal-soft);border-radius:999px;padding:2px 8px}
+.is-learned .learned{display:inline-block}
+.is-learned button.teach{display:none}
+.status{grid-column:2;grid-row:1/span 3;font-size:12px;font-weight:600;color:var(--leaf);display:none}
+.card.done{background:var(--sage-soft);border-color:#D5E5D8;opacity:.75}
 .card.done .acts{display:none} .card.done .status{display:block}
-.speaking{outline:2px solid var(--brand);outline-offset:2px;box-shadow:0 0 0 6px rgba(37,99,235,.12)}
-.tag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;letter-spacing:.04em;font-family:Inter,sans-serif}
-.tag.r{background:var(--red);color:#fff}.tag.a{background:var(--amber-soft);color:var(--amber)}.tag.b{background:var(--brand-soft);color:var(--brand)}
+.speaking{outline:2px solid var(--teal);outline-offset:2px;box-shadow:0 0 0 5px rgba(60,122,102,.12)}
+.tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;letter-spacing:.04em}
+.tag.r{background:var(--red);color:#fff}.tag.a{background:var(--amber-soft);color:var(--amber)}.tag.b{background:var(--teal-soft);color:var(--teal)}
 
-.slot{display:grid;grid-template-columns:1fr 24px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;transition:.25s}
-.slot .s,.slot .p{font-family:var(--display);font-weight:700}
-.slot small{display:block;font-family:Inter,sans-serif;font-weight:400;color:var(--muted);font-size:12px}
-.slot .arrow{color:var(--brand);font-weight:800;text-align:center}
-.slot .go{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:12px;font-weight:600;color:var(--amber)}
-.slot .go button{padding:8px 13px;font-size:13px;font-weight:600;background:var(--brand);color:#fff;white-space:nowrap}
-.slot .go button:hover{background:var(--brand-2)}
-.slot.done{background:var(--green-soft);border-color:#A7F3D0}
-.slot.done .go{color:var(--green)} .slot.done .go button{display:none}
-.offerall{width:100%;padding:11px;background:var(--ink);color:#fff;font-weight:700;margin-top:4px}
-.offerall:hover{background:var(--ink-2);box-shadow:0 4px 16px rgba(10,22,40,.25)}
+.slot{display:grid;grid-template-columns:1fr 22px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;transition:.25s}
+.slot .s,.slot .p{font-weight:600}
+.slot small{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+.slot .arrow{color:var(--teal);text-align:center}
+.slot .go{display:flex;flex-direction:column;align-items:flex-end;gap:5px;font-size:11.5px;font-weight:600;color:var(--amber)}
+.slot .go .btns{display:flex;gap:6px}
+.slot.done{background:var(--sage-soft);border-color:#D5E5D8}
+.slot.done .go{color:var(--leaf)} .slot.done .go .btns{display:none}
+.offerall{width:100%;padding:10px;background:var(--forest);color:#fff;font-weight:600;font-size:13px;margin-top:4px}
+.offerall:hover{background:var(--forest-2)}
 
-ul.list{margin:0;padding:0;list-style:none;color:#334155;font-size:13.5px}
-ul.list li{padding:8px 0;border-bottom:1px dashed var(--line);display:flex;gap:10px}
+ul.list{margin:0;padding:0;list-style:none;color:#3E4C45;font-size:13px}
+ul.list li{padding:7px 0;border-bottom:1px dashed var(--line);display:flex;gap:10px}
 ul.list li:last-child{border:0}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--brand);margin-top:8px;flex:none}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--sage);margin-top:8px;flex:none}
 
 /* HANDLED */
-.handled{margin-top:14px;background:var(--brand-soft);border:1px solid #DBEAFE;border-radius:16px;padding:16px 20px}
+.handled{margin-top:12px;background:#EFF3EE;border:1px solid var(--line);border-radius:12px;padding:14px 18px}
 .handled summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px}
 .handled summary::-webkit-details-marker{display:none}
-.handled .ico{width:34px;height:34px;border-radius:10px;background:#fff;border:1px solid #DBEAFE;color:var(--brand);display:grid;place-items:center;font-weight:800}
-.handled summary b{font-family:var(--display);display:block}
-.handled summary small{color:var(--muted);font-size:12.5px}
-.handled .big{margin-left:auto;font-family:var(--display);font-size:26px;font-weight:800;color:var(--brand)}
+.handled .ico{width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--line);color:var(--leaf);display:grid;place-items:center}
+.handled summary b{display:block;font-weight:600;font-size:13.5px}
+.handled summary small{color:var(--muted);font-size:11.5px}
+.handled .big{margin-left:auto;font-size:22px;font-weight:600;color:var(--teal)}
 .handled .chev{color:var(--muted);transition:.2s}
 .handled[open] .chev{transform:rotate(180deg)}
 .pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12.5px;color:#334155}
-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:12px;background:#fff;border-radius:10px;overflow:hidden}
-td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:#334155}
-footer{display:flex;justify-content:space-between;color:var(--faint);font-size:12px;margin-top:28px;padding-top:16px;border-top:1px solid var(--line)}
+.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;color:#3E4C45}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px;background:#fff;border-radius:8px;overflow:hidden}
+td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:#3E4C45}
+footer{display:flex;justify-content:space-between;color:var(--faint);font-size:11px;margin-top:24px;padding-top:14px;border-top:1px solid var(--line)}
 
-.main>*,.kpi,.hero>div{min-width:0}
-body{overflow-x:hidden}
-@media(max-width:900px){.hero{flex-direction:column;align-items:stretch}.clock{min-width:0}.main{grid-template-columns:1fr}.side{position:static}.kpis{grid-template-columns:1fr 1fr}.kpi:nth-child(2){border-right:0}.kpi:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .card{grid-template-columns:1fr}.acts,.status{grid-column:1;grid-row:auto;justify-content:flex-start}.slot{grid-template-columns:1fr 20px 1fr}.slot .go{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}.practice div{display:none}h1{font-size:24px}}
+/* TEACH MODAL */
+.modal{position:fixed;inset:0;background:rgba(28,43,36,.35);display:none;place-items:center;padding:16px;z-index:10}
+.modal.show{display:grid}
+.sheet{background:#fff;border-radius:14px;max-width:460px;width:100%;padding:20px;box-shadow:0 20px 50px rgba(28,43,36,.25)}
+.sheet h3{margin:0;font-size:17px;font-weight:600;display:flex;gap:8px;align-items:center}
+.sheet .from{font-size:12px;color:var(--muted);margin:4px 0 12px}
+.sheet label{font-size:12px;font-weight:600;color:var(--ink)}
+.sheet textarea{width:100%;margin-top:6px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:13.5px;min-height:92px;resize:vertical;outline:none;background:#FBFCFA}
+.sheet textarea:focus{border-color:var(--teal)}
+.sheet .impact{margin-top:10px;background:var(--sage-soft);border-radius:10px;padding:9px 12px;font-size:12.5px;color:var(--ink)}
+.sheet .row{display:flex;gap:8px;margin-top:14px;justify-content:flex-end}
+.sheet .row button{padding:9px 14px;font-weight:600;font-size:13px}
+.sheet .save{background:var(--forest);color:#fff}
+.sheet .cancel{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.sheet .dictate{margin-right:auto;background:var(--sage-soft);color:var(--leaf)}
+.sheet .dictate.listening{background:var(--red);color:#fff}
+
+@media(max-width:900px){.main{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.kpi:nth-child(2){border-right:0}.kpi:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .hero{flex-direction:column;align-items:stretch}.clock{min-width:0}
+  .card{grid-template-columns:1fr}.acts,.status{grid-column:1;grid-row:auto;justify-content:flex-start}.slot{grid-template-columns:1fr 20px 1fr}.slot .go{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}.practice div{display:none}h1{font-size:23px}}
 </style>
 </head>
 <body>
 <nav class="nav"><div class="in">
-  <div class="brand"><div class="logo">CH</div><b>Call Hero</b><i class="sep"></i><span>Jade · Morning brief</span></div>
-  <div class="practice"><div><b id="pName"></b><small id="pWhere"></small></div><span class="ic">🦷</span></div>
+  <div class="brand"><div class="logo">J</div><b>jade<i>.</i></b><i class="sep"></i><span>Morning brief</span></div>
+  <div class="practice"><span class="ic">+</span><div><b id="pName"></b><small>Your practice, in good hands</small></div></div>
 </div></nav>
 
 <div class="wrap">
   <section class="hero">
     <div>
-      <div class="eyebrow">☀ <span id="clinic"></span></div>
-      <h1>Good morning. <span>Here’s your weekend.</span></h1>
+      <div class="eyebrow">☼ Your Monday morning, simplified</div>
+      <h1>Good morning. <span>Let’s get you ready.</span></h1>
       <p class="sub" id="headline"></p>
     </div>
     <div class="clock">
-      <div class="row"><span>⏱ <b id="secs">90</b>s to clear before 8:30</span><b id="progress"></b></div>
+      <div class="row"><span>◷ <span id="clinic"></span></span><span>⏱ <b id="secs">90</b>s</span></div>
       <div class="bar"><i id="barFill"></i></div>
+      <div class="row" style="margin-top:4px"><span>Before your 8:30 patient</span><b id="progress"></b></div>
     </div>
   </section>
 
   <section class="kpis">
-    <div class="kpi"><div class="l">📞 Calls answered</div><div class="v" id="kCalls"></div></div>
-    <div class="kpi blue"><div class="l">✓ Handled by Jade</div><div class="v" id="kHandled"></div></div>
-    <div class="kpi"><div class="l">↗ Need your attention</div><div class="v" id="kNeed"></div></div>
-    <div class="kpi red"><div class="l">♥ Urgent</div><div class="v" id="kUrgent"></div></div>
+    <div class="kpi"><div class="l"><i>✆</i> Calls answered</div><div class="v" id="kCalls"></div></div>
+    <div class="kpi teal"><div class="l"><i>⛉</i> Handled by Jade</div><div class="v" id="kHandled"></div></div>
+    <div class="kpi"><div class="l"><i>↗</i> Need your attention</div><div class="v" id="kNeed"></div></div>
+    <div class="kpi red"><div class="l"><i>♡</i> Urgent items</div><div class="v" id="kUrgent"></div></div>
   </section>
 
   <div class="main">
     <aside class="side">
       <section class="jade" id="jadePanel">
-        <div class="jhead"><div class="avatar" id="avatar">J</div><div><b>A moment with Jade</b><small>Your weekend, in a few words.</small></div></div>
+        <div class="jhead"><div class="avatar" id="avatar">✦</div><div><b>A moment with Jade</b><small>Your weekend, in a few words.</small></div></div>
         <div class="wave" id="wave"></div>
+        <div class="jtitle" id="jTitle"></div>
         <small id="jadeLabel">Jade · summary</small>
         <p id="jadeText"></p>
-        <button class="btn-jade" id="askBtn"><span>▶ Ask Jade</span><small>60-sec voice brief</small></button>
+        <button class="btn-jade" id="askBtn"><span>▶&nbsp; Listen to Jade</span><small>Voice brief</small></button>
         <div class="jbtns"><button class="btn-ghost" id="briefBtn">Full briefing</button><button class="btn-stop" id="stopBtn">■ Stop</button></div>
         <div class="ask">
           <input id="q" placeholder="Ask Jade… “What’s urgent?”">
           <button class="mic" id="micBtn" title="Speak">🎤</button>
           <button id="qBtn">Ask</button>
         </div>
+        <div class="jfoot">🎧 Tap and listen while you make your coffee.</div>
       </section>
-      <div class="note"><span>🛡</span><div><b>Jade handles the conversations.</b>You make the decisions that matter.</div></div>
+      <div class="note"><span>⛉</span><div><b>Jade handles the conversations.</b>You make the decisions that matter.</div></div>
+
+      <section class="rules" id="rulesCard">
+        <h3>✦ Jade’s rules <span class="n" id="nRules"></span></h3>
+        <p class="hint">Teach Jade once. Your Monday list gets shorter every week.</p>
+        <div class="meter"><div>Next weekend Jade handles <b id="nextN">0</b> of <span id="nextT"></span> of today’s items herself</div><div class="bar"><i id="nextBar"></i></div></div>
+        <div id="ruleList"></div>
+        <button class="reset" id="resetRules">Reset rules</button>
+      </section>
+
       <div class="insight" id="insight"></div>
     </aside>
 
     <section>
-      <div class="ph"><h2>Your morning priorities</h2><span>Sorted by what needs you first</span></div>
+      <div class="ph"><h2>Your morning priorities</h2><span>A little less to think about</span></div>
       <div class="box">
-        <div class="group"><div class="gh g-red"><span class="ico">!</span>Act now <span class="hint">· before 8:30</span><span class="n" id="nNow"></span></div><div id="doNow"></div></div>
-        <div class="group"><div class="gh g-blue"><span class="ico">↻</span>Fill freed slots <span class="hint">· cancellations matched to waiting patients</span><span class="n" id="nSlots"></span></div><div id="slots"></div><button class="offerall" id="offerAll">Send all offers by SMS</button></div>
-        <div class="group"><div class="gh g-amber"><span class="ico">→</span>Delegate to reception <span class="hint">· one tap each</span><span class="n" id="nDel"></span></div><div id="delegate"></div></div>
-        <div class="group"><div class="gh g-green"><span class="ico">✎</span>Heads-up this week</div><ul class="list" id="headsup"></ul></div>
+        <div class="group"><div class="gh g-red"><span class="ico">♡</span>Act now <span class="hint">· before 8:30</span><span class="n" id="nNow"></span></div><div id="doNow"></div></div>
+        <div class="group"><div class="gh g-blue"><span class="ico">◷</span>Fill freed slots <span class="hint">· cancellations matched to waiting patients</span><span class="n" id="nSlots"></span></div><div id="slots"></div><button class="offerall" id="offerAll">Send all offers by SMS</button></div>
+        <div class="group"><div class="gh g-amber"><span class="ico">→</span>Do today <span class="hint">· delegate to reception</span><span class="n" id="nDel"></span></div><div id="delegate"></div></div>
+        <div class="group"><div class="gh g-green"><span class="ico">❦</span>Opportunities &amp; heads-up</div><ul class="list" id="headsup"></ul></div>
       </div>
 
       <details class="handled">
-        <summary><span class="ico">✓</span><div><b>Handled by Jade</b><small>The calls you won’t have to worry about.</small></div><span class="big" id="handledN"></span><span class="chev">▾</span></summary>
+        <summary><span class="ico">⛉</span><div><b>Handled by Jade</b><small>The calls you won’t have to worry about.</small></div><span class="big" id="handledN"></span><span class="chev">▾</span></summary>
         <div class="pills" id="pills"></div>
         <table id="allCalls"></table>
       </details>
@@ -228,6 +279,21 @@ body{overflow-x:hidden}
   </div>
 
   <footer><span>● Built around your attention.</span><span>Jade Morning Brief / Call Hero prototype</span></footer>
+</div>
+
+<div class="modal" id="teachModal">
+  <div class="sheet">
+    <h3>✦ Teach Jade</h3>
+    <div class="from" id="teachFrom"></div>
+    <label for="teachText">Next time this happens, Jade should…</label>
+    <textarea id="teachText"></textarea>
+    <div class="impact" id="teachImpact"></div>
+    <div class="row">
+      <button class="dictate" id="teachMic">🎤 Say it</button>
+      <button class="cancel" id="teachCancel">Cancel</button>
+      <button class="save" id="teachSave">Save rule</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -292,7 +358,7 @@ const laterBooked = num => byNumber[num].some(c => c.outcome === "booked");
 // 1. Urgent + escalating complaints = DO NOW
 const doNow = [];
 calls.filter(c => c.flagged === "urgent").forEach(c => doNow.push({
-  key:c.id, cls:"red", tag:["URGENT","r"], name:c.caller_name, calls:[c],
+  key:c.id, cat:"urgent", cls:"red", tag:["URGENT","r"], name:c.caller_name, calls:[c],
   meta:`Called ${callTime(c)} · ${c.caller_number}`,
   why:"In significant pain overnight. Jade sent him to ED if it got worse and promised a call first thing Monday.",
   primary:"Call now", speak:`${c.caller_name} called at ${hm(c.started_at.slice(11,16))} in the morning in significant pain. He's expecting a call first thing.`
@@ -301,7 +367,7 @@ const complaintCallers = [...new Set(calls.filter(c=>c.flagged==="complaint").ma
 complaintCallers.forEach(num => {
   const cs = byNumber[num].filter(c=>c.flagged==="complaint");
   doNow.push({
-    key:num, cls:"red", tag:[`${cs.length} CALLS`,"r"], name:cs[0].caller_name, calls:cs,
+    key:num, cat:"complaint", cls:"red", tag:[`${cs.length} CALLS`,"r"], name:cs[0].caller_name, calls:cs,
     meta:`Billing dispute · first call ${callTime(cs[0])} · last ${callTime(cs.at(-1))}`,
     why:"Says he was charged for a service he didn't receive. No callback since Friday and getting more frustrated — a bad-review risk.",
     primary:"Call before 9", speak:`${cs[0].caller_name} has called ${cs.length} times about a billing dispute and hasn't had a callback since Friday. He's getting frustrated.`
@@ -326,14 +392,14 @@ const matches = freed.map((s,i)=>({slot:s, who:seekers[i]})).filter(m=>m.who);
 
 // 3. DELEGATE
 const delegate = [];
-calls.filter(c=>c.flagged==="rebook_requested").forEach(c=>delegate.push({key:c.id,cls:"amber",name:c.caller_name,tag:["REBOOK","a"],
+calls.filter(c=>c.flagged==="rebook_requested").forEach(c=>delegate.push({key:c.id,cat:"rebook",cls:"amber",name:c.caller_name,tag:["REBOOK","a"],
   why:"Cancelled for a family emergency — asked to be called to rebook next week.",meta:c.caller_number}));
-calls.filter(c=>c.flagged==="bad_data").forEach(c=>delegate.push({key:c.id,cls:"amber",name:c.caller_name,tag:["NEW PATIENT","a"],
+calls.filter(c=>c.flagged==="bad_data").forEach(c=>delegate.push({key:c.id,cat:"baddata",cls:"amber",name:c.caller_name,tag:["NEW PATIENT","a"],
   why:`Number given was one digit short (041277520) — but caller ID captured <b>${c.caller_number}</b>. Call that.`,meta:"Wants a first appointment"}));
-calls.filter(c=>c.flagged==="service_not_offered").forEach(c=>delegate.push({key:c.id,cls:"blue",name:c.caller_name,tag:["REFERRAL","b"],
+calls.filter(c=>c.flagged==="service_not_offered").forEach(c=>delegate.push({key:c.id,cat:"referral",cls:"blue",name:c.caller_name,tag:["REFERRAL","b"],
   why:"Asked about orthodontics / clear aligners. Send an orthodontist referral.",meta:c.caller_number}));
 const hang = calls.filter(c=>c.outcome==="hung_up");
-if(hang.length) delegate.push({key:"hang",cls:"blue",name:`${hang.length} hang-ups`,tag:["SMS","b"],
+if(hang.length) delegate.push({key:"hang",cat:"hangup",cls:"blue",name:`${hang.length} hang-ups`,tag:["SMS","b"],
   why:`Hung up at Jade's greeting. Send a “Sorry we missed you — book online” text.`,meta:hang.map(h=>h.caller_number).join(" · ")});
 
 // 4. HEADS-UP
@@ -353,29 +419,30 @@ const totalActions = doNow.length + matches.length + delegate.length;
 const done = new Set();
 
 /* ================= RENDER ================= */
-$("clinic").textContent = `Monday 17 Nov · 8:00am · ${DATA.period.label}`;
-$("pName").textContent = DATA.clinic.name; $("pWhere").textContent = `${DATA.clinic.suburb}, ${DATA.clinic.state} · ${DATA.clinic.practitioners.length} dentists`;
-$("wave").innerHTML = Array.from({length:34},(_,i)=>`<i style="height:${20+Math.round(Math.abs(Math.sin(i*1.7))*60)}%;animation-delay:${(i%9)*.08}s"></i>`).join("");
-$("headline").innerHTML = `Jade answered all ${calls.length} calls and booked ${booked.length}. <em>${doNow.length} need you now</em>, and ${matches.length} freed slots are ready to fill.`;
+$("clinic").textContent = `Weekend briefing · 14–17 Nov`;
+$("pName").textContent = DATA.clinic.name;
+$("jTitle").textContent = `${calls.length} calls. ${doNow.length} need you.`;
+$("wave").innerHTML = Array.from({length:40},(_,i)=>`<i style="height:${20+Math.round(Math.abs(Math.sin(i*1.7))*60)}%;animation-delay:${(i%9)*.08}s"></i>`).join("");
+$("headline").innerHTML = `A clear start to your day. Jade answered all ${calls.length} calls and booked ${booked.length}; <em>${doNow.length} need you now</em>.`;
 $("kCalls").innerHTML = `${calls.length}<small>over the weekend</small>`;
 $("kHandled").innerHTML = `${handledCount}<small>no further action</small>`;
-$("kUrgent").innerHTML = `${doNow.length}<small>before 8:30</small>`;
 $("nNow").textContent = doNow.length; $("nSlots").textContent = matches.length; $("nDel").textContent = delegate.length;
 
 function cardHTML(d, primary, secondary){
-  return `<div class="card ${d.cls}" id="k-${d.key}">
-    <div class="t"><span>${d.name}</span><span class="tag ${d.tag[1]}">${d.tag[0]}</span></div>
+  return `<div class="card ${d.cls}" id="k-${d.key}" data-cat="${d.cat}">
+    <div class="t"><span>${d.name}</span><span class="tag ${d.tag[1]}">${d.tag[0]}</span><span class="learned">✦ Jade handles this next time</span></div>
     <div class="meta">${d.meta}</div><div class="why">${d.why}</div>
-    <div class="acts"><button onclick="act('${d.key}','✓ Done')">${primary}</button>${secondary?`<button class="sec" onclick="act('${d.key}','→ Assigned to reception')">${secondary}</button>`:""}</div>
+    <div class="acts"><button onclick="act('${d.key}','✓ Done')">${primary}</button>${secondary?`<button class="sec" onclick="act('${d.key}','→ Assigned to reception')">${secondary}</button>`:""}<button class="teach" onclick="teach('${d.cat}','${d.name}')">✦ Teach Jade</button></div>
     <div class="status"></div></div>`;
 }
 $("doNow").innerHTML = doNow.map(d=>cardHTML(d,d.primary,"Delegate")).join("");
 $("delegate").innerHTML = delegate.map(d=>cardHTML(d,"Assign to reception",null)).join("");
-$("slots").innerHTML = matches.map((m,i)=>`<div class="slot" id="k-slot${i}">
+$("slots").innerHTML = matches.map((m,i)=>`<div class="slot" id="k-slot${i}" data-cat="slot">
    <div class="s">${dayShort(m.slot.date)} · ${hm(m.slot.time)}<small>${doc(m.slot.practitioner)} · freed by ${m.slot.from}</small></div>
    <div class="arrow">→</div>
    <div class="p">${m.who.name}<small>${m.who.reason}</small></div>
-   <div class="go"><span>${isToday(m.slot.date)?"⚡ Today":""}</span><button onclick="offer(${i})">Send offer</button></div></div>`).join("");
+   <div class="go"><span>${isToday(m.slot.date)?"⚡ Today":""}<span class="learned">✦ Auto next time</span></span><div class="btns"><button onclick="offer(${i})">Send offer</button></div></div></div>`).join("");
+$("offerAll").insertAdjacentHTML("afterend",`<button class="offerall teach" id="teachSlots" style="margin-top:6px" onclick="teach('slot','Cancelled slots')">✦ Teach Jade to fill cancellations herself</button>`);
 $("headsup").innerHTML = heads.map(h=>`<li><span class="dot"></span><span>${h}</span></li>`).join("");
 $("handledN").textContent = handledCount;
 const pillData = [["booked",booked.length],["questions answered",count("question_answered")],["wrong number",count("wrong_number")]];
@@ -385,7 +452,7 @@ const naCalls = calls.filter(c=>c.outcome==="no_availability");
 const naPeople = new Set(naCalls.map(c=>c.caller_number)).size;
 $("insight").innerHTML = `<b>💡 Pattern:</b> ${naCalls.length} calls from ${naPeople} people couldn't get a suitable slot — mostly for Monday/Tuesday. Early-week demand is beating capacity. Consider an extra early-week session or letting Jade run an automatic waitlist that fills cancellations instantly.`;
 
-function updateProgress(){ $("progress").textContent = `${done.size} of ${totalActions} cleared`; $("kNeed").innerHTML = `${totalActions-done.size}<small>actions remaining</small>`; $("kUrgent").innerHTML = `${doNow.filter(d=>!done.has(d.key)).length}<small>before 8:30</small>`; }
+function updateProgress(){ $("progress").textContent = `${done.size} of ${totalActions} cleared`; $("kNeed").innerHTML = `${totalActions-done.size}<small>human actions remaining</small>`; $("kUrgent").innerHTML = `${doNow.filter(d=>!done.has(d.key)).length}<small>within remaining actions</small>`; }
 updateProgress();
 
 function act(key,label){
@@ -465,6 +532,59 @@ function startTimer(){
 $("askBtn").onclick=()=>{ startTimer(); $("jadeText").textContent=SUMMARY+`  (${SUMMARY.split(/\s+/).length} words)`; say([{text:SUMMARY}],"Jade · summary"); };
 $("briefBtn").onclick=()=>{ startTimer(); say(buildBriefing(),"Jade · full briefing"); };
 
+
+/* ================= TEACH JADE ================= */
+// Owner turns a decision into a standing rule; Jade applies it next weekend, so the Monday list shrinks.
+const SUGGEST = {
+  urgent:   {label:"Urgent pain calls", rule:"If a patient calls in pain, offer them the earliest cancelled or free slot and text them to confirm. Only escalate to me if there's swelling, bleeding or trauma."},
+  complaint:{label:"Billing disputes", rule:"For billing disputes, text the practice manager straight away with the caller's details, and tell the caller they'll hear back within 2 business hours."},
+  slot:     {label:"Cancellations", rule:"When someone cancels, automatically offer the slot by SMS to the waitlist, most urgent first. The first person to reply YES gets it."},
+  rebook:   {label:"Rebook requests", rule:"If someone cancels and asks to rebook, text them three available times the next business morning."},
+  baddata:  {label:"Bad callback numbers", rule:"If a callback number looks invalid, use the caller ID instead and read the number back to the caller to confirm it."},
+  referral: {label:"Services we don't offer", rule:"If someone asks about orthodontics or aligners, text them our preferred orthodontist's referral details."},
+  hangup:   {label:"Hang-ups", rule:"If a caller hangs up at the greeting, text them: “Sorry we missed you — book online anytime” with our booking link."}
+};
+const allItems = [...doNow.map(d=>d.cat), ...matches.map(()=>"slot"), ...delegate.map(d=>d.cat)];
+let rules = {};
+try { rules = JSON.parse(localStorage.getItem("jadeRules")||"{}"); } catch(e) { rules = {}; }
+const saveRules = () => { try { localStorage.setItem("jadeRules", JSON.stringify(rules)); } catch(e) {} };
+const coveredCount = (r=rules) => allItems.filter(c=>r[c]).length;
+
+function renderRules(){
+  const keys = Object.keys(rules);
+  $("nRules").textContent = `${keys.length} learned`;
+  $("nextN").textContent = coveredCount(); $("nextT").textContent = totalActions;
+  $("nextBar").style.width = (coveredCount()/totalActions*100)+"%";
+  $("ruleList").innerHTML = keys.length
+    ? keys.map(k=>`<div class="rule"><span class="dotg">✦</span><span><b>${SUGGEST[k].label}:</b> ${rules[k]}</span><button title="Remove rule" onclick="forget('${k}')">×</button></div>`).join("")
+    : `<div class="norules">No rules yet. Tap <b>✦ Teach Jade</b> on any item.</div>`;
+  document.querySelectorAll("[data-cat]").forEach(el=>el.classList.toggle("is-learned", !!rules[el.dataset.cat]));
+  $("resetRules").style.display = keys.length ? "inline" : "none";
+  $("teachSlots").style.display = rules.slot ? "none" : "block";
+}
+let teachCat = null;
+function teach(cat, from){
+  teachCat = cat;
+  $("teachFrom").textContent = `From today's list: ${from} · ${SUGGEST[cat].label}`;
+  $("teachText").value = rules[cat] || SUGGEST[cat].rule;
+  const n = allItems.filter(c=>c===cat).length, after = coveredCount({...rules,[cat]:true});
+  $("teachImpact").innerHTML = `This would have handled <b>${n}</b> item${n>1?"s":""} on today's list. Next weekend, Jade handles <b>${after} of ${totalActions}</b> items herself.`;
+  $("teachModal").classList.add("show"); $("teachText").focus();
+}
+function closeTeach(){ $("teachModal").classList.remove("show"); }
+function forget(cat){ delete rules[cat]; saveRules(); renderRules(); }
+$("teachCancel").onclick = closeTeach;
+$("teachModal").onclick = e => { if(e.target.id==="teachModal") closeTeach(); };
+$("teachSave").onclick = () => {
+  const text = $("teachText").value.trim(); if(!text) return;
+  rules[teachCat] = text; saveRules(); renderRules(); closeTeach();
+  const left = totalActions - coveredCount();
+  const msg = `Got it. Next time, I'll handle that myself. Next Monday your list drops from ${totalActions} items to ${left}.`;
+  $("jadeText").textContent = msg; say([{text:msg}], "Jade · learned a rule");
+};
+$("resetRules").onclick = () => { rules = {}; saveRules(); renderRules(); };
+renderRules();
+
 /* ================= ASK JADE ANYTHING ================= */
 function answer(q){
   q=q.toLowerCase();
@@ -479,6 +599,7 @@ function answer(q){
   if(/repeat|twice|again|multiple|more than once/.test(q)) return Object.values(byNumber).filter(c=>c.length>1).map(c=>`${c[0].caller_name} called ${c.length} times`).join(", ")+".";
   if(/book/.test(q)) return `I booked ${booked.length} appointments: ${newPatients.length} new patients and ${booked.length-newPatients.length} existing.`;
   if(/question|parking|hcf|fee/.test(q)) return `I answered ${count("question_answered")} questions on parking, HCF and gap fees. No follow-up needed.`;
+  if(/rule|teach|learn|next week/.test(q)){const r=Object.values(rules); return r.length?`You've taught me ${r.length} rule${r.length>1?"s":""}. Next weekend I'll handle ${coveredCount()} of today's ${totalActions} items myself.`:`No rules yet. Tap Teach Jade on any card and I'll handle it myself next time.`;}
   if(/pattern|insight|trend|capacity/.test(q)) return `${naCalls.length} calls couldn't get a suitable slot, mostly for Monday or Tuesday. Early-week demand is beating capacity.`;
   return SUMMARY;
 }
@@ -495,6 +616,13 @@ if(SR){
   rec.onresult=e=>{ $("q").value=e.results[0][0].transcript; ask(); };
   rec.onend=()=>$("micBtn").classList.remove("listening");
 } else $("micBtn").style.display="none";
+
+if(SR){
+  const trec=new SR(); trec.lang="en-AU"; trec.interimResults=false;
+  $("teachMic").onclick=()=>{ speechSynthesis.cancel(); $("teachMic").classList.add("listening"); trec.start(); };
+  trec.onresult=e=>{ $("teachText").value=e.results[0][0].transcript; };
+  trec.onend=()=>$("teachMic").classList.remove("listening");
+} else $("teachMic").style.display="none";
 </script>
 </body>
 </html>
