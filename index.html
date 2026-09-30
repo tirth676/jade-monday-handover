@@ -76,7 +76,8 @@ h1 span{color:var(--faint);font-weight:500}
 @keyframes wv{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1.5)}}
 .jtitle{font-size:19px;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:4px 0 6px}
 #jadeLabel{display:block;color:var(--sage);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
-#jadeText{margin:4px 0 14px;font-size:12.5px;line-height:1.6;color:#DCE7DF;max-height:190px;overflow:auto}
+#jadeText{margin:4px 0 14px;font-size:12.5px;line-height:1.6;color:#DCE7DF}
+.jsub{font-size:12.5px;color:#B9CBBF;margin:-2px 0 4px}
 .btn-jade{width:100%;background:var(--sage);color:var(--forest);padding:11px 12px;font-weight:600;font-size:13px;display:flex;justify-content:space-between;align-items:center}
 .btn-jade small{font-weight:400;opacity:.75;font-size:10.5px}
 .btn-jade:hover{background:var(--sage-2)}
@@ -143,7 +144,9 @@ button.teach:hover{background:#E2EEE4!important}
 .learned{display:none;font-size:10.5px;font-weight:600;color:var(--teal);background:var(--teal-soft);border-radius:999px;padding:2px 8px}
 .is-learned .learned{display:inline-block}
 .is-learned button.teach{display:none}
-.status{grid-column:2;grid-row:1/span 3;font-size:12px;font-weight:600;color:var(--leaf);display:none}
+.card.done{opacity:1} .card.done .why,.card.done .meta{opacity:.6}
+.status{grid-column:2;grid-row:1/span 3;font-size:12px;font-weight:600;color:var(--leaf);display:none;text-align:right}
+.status button.teach{display:block;margin-top:6px;padding:5px 10px;font-size:11.5px;border-radius:8px}
 .card.done{background:var(--sage-soft);border-color:#D5E5D8;opacity:.75}
 .card.done .acts{display:none} .card.done .status{display:block}
 .speaking{outline:2px solid var(--teal);outline-offset:2px;box-shadow:0 0 0 5px rgba(60,122,102,.12)}
@@ -221,10 +224,10 @@ footer{display:flex;justify-content:space-between;color:var(--faint);font-size:1
   </section>
 
   <section class="kpis">
-    <div class="kpi"><div class="l"><i>✆</i> Calls answered</div><div class="v" id="kCalls"></div></div>
-    <div class="kpi teal"><div class="l"><i>⛉</i> Handled by Jade</div><div class="v" id="kHandled"></div></div>
-    <div class="kpi"><div class="l"><i>↗</i> Need your attention</div><div class="v" id="kNeed"></div></div>
-    <div class="kpi red"><div class="l"><i>♡</i> Urgent items</div><div class="v" id="kUrgent"></div></div>
+    <div class="kpi"><div class="l"><i>✆</i> Calls received</div><div class="v" id="kCalls"></div></div>
+    <div class="kpi teal"><div class="l"><i>⛉</i> Calls fully handled</div><div class="v" id="kHandled"></div></div>
+    <div class="kpi"><div class="l"><i>↗</i> Staff tasks remaining</div><div class="v" id="kNeed"></div></div>
+    <div class="kpi red"><div class="l"><i>♡</i> Urgent tasks</div><div class="v" id="kUrgent"></div></div>
   </section>
 
   <div class="main">
@@ -232,7 +235,7 @@ footer{display:flex;justify-content:space-between;color:var(--faint);font-size:1
       <section class="jade" id="jadePanel">
         <div class="jhead"><div class="avatar" id="avatar">✦</div><div><b>A moment with Jade</b><small>Your weekend, in a few words.</small></div></div>
         <div class="wave" id="wave"></div>
-        <div class="jtitle" id="jTitle"></div>
+        <div class="jtitle" id="jTitle"></div><div class="jsub" id="jSub"></div>
         <small id="jadeLabel">Jade · summary</small>
         <p id="jadeText"></p>
         <button class="btn-jade" id="askBtn"><span>▶&nbsp; Listen to Jade</span><small>Voice brief</small></button>
@@ -356,8 +359,8 @@ const doNow = [];
 calls.filter(c => c.flagged === "urgent").forEach(c => doNow.push({
   key:c.id, cat:"urgent", cls:"red", tag:["URGENT","r"], name:c.caller_name, calls:[c],
   meta:`Called ${callTime(c)} · ${c.caller_number}`,
-  why:"In significant pain overnight. Jade sent him to ED if it got worse and promised a call first thing Monday.",
-  primary:"Call now", speak:`${c.caller_name} called at ${hm(c.started_at.slice(11,16))} in the morning in significant pain. He's expecting a call first thing.`
+  why:"Flagged urgent overnight. Jade followed the clinic's emergency guidance and promised a callback first thing Monday.",
+  primary:"Call now", speak:`${c.caller_name} called at ${hm(c.started_at.slice(11,16))} in the morning and was flagged urgent. He's expecting a call first thing.`
 }));
 const complaintCallers = [...new Set(calls.filter(c=>c.flagged==="complaint").map(c=>c.caller_number))];
 complaintCallers.forEach(num => {
@@ -375,7 +378,7 @@ const freed = calls.filter(c => c.outcome==="cancelled" && c.appointment)
   .map(c => ({...c.appointment, from:c.caller_name, at:new Date(`${c.appointment.date}T${c.appointment.time}:00+11:00`)}))
   .filter(s => s.at >= NOW).sort((a,b)=>a.at-b.at);
 const seekers = [];
-calls.filter(c=>c.flagged==="urgent").forEach(c=>seekers.push({name:c.caller_name,num:c.caller_number,rank:0,reason:"urgent pain — see today"}));
+calls.filter(c=>c.flagged==="urgent").forEach(c=>seekers.push({name:c.caller_name,num:c.caller_number,rank:0,reason:"flagged urgent — see today"}));
 const noAvail = [...new Set(calls.filter(c=>c.outcome==="no_availability").map(c=>c.caller_number))].filter(n=>!laterBooked(n));
 noAvail.forEach(n => {
   const cs = byNumber[n]; const last = cs.at(-1);
@@ -415,21 +418,23 @@ const totalActions = doNow.length + matches.length + delegate.length;
 const done = new Set();
 
 /* ================= RENDER ================= */
-$("clinic").textContent = `Weekend briefing  •  14–17 Nov`;
+$("clinic").textContent = `Weekend briefing  •  14–17 Nov  •  Demo data from the hackathon brief`;
 $("pName").textContent = DATA.clinic.name;
-$("jTitle").textContent = `${calls.length} calls. ${doNow.length} need you.`;
+$("jTitle").textContent = `${calls.length} calls. ${doNow.length} need you now.`;
+$("jSub").textContent = `${totalActions-doNow.length} more can wait until later today.`;
 $("wave").innerHTML = Array.from({length:40},(_,i)=>`<i style="height:${20+Math.round(Math.abs(Math.sin(i*1.7))*60)}%;animation-delay:${(i%9)*.08}s"></i>`).join("");
 $("headline").innerHTML = `A clear start to your day. Jade answered all ${calls.length} calls and booked ${booked.length}; <em>${doNow.length} need you now</em>.`;
 $("kCalls").innerHTML = `${calls.length}<small>over the weekend</small>`;
-$("kHandled").innerHTML = `${handledCount}<small>no further action</small>`;
+$("kHandled").innerHTML = `${handledCount}<small>by Jade, no action needed</small>`;
 $("nNow").textContent = doNow.length; $("nSlots").textContent = matches.length; $("nDel").textContent = delegate.length;
 
+const SUGGEST_KEYS = ["complaint","slot","rebook","baddata","referral","hangup"]; // never "urgent": clinical escalations stay with a human
 function cardHTML(d, primary, secondary){
   return `<div class="card ${d.cls}" id="k-${d.key}" data-cat="${d.cat}">
     <div class="t"><span>${d.name}</span><span class="tag ${d.tag[1]}">${d.tag[0]}</span><span class="learned">✦ Jade handles this next time</span></div>
     <div class="meta">${d.meta}</div><div class="why">${d.why}</div>
-    <div class="acts"><button onclick="act('${d.key}','✓ Done')">${primary}</button>${secondary?`<button class="sec" onclick="act('${d.key}','→ Assigned to reception')">${secondary}</button>`:""}<button class="teach" onclick="teach('${d.cat}','${d.name}')">✦ Teach Jade</button></div>
-    <div class="status"></div></div>`;
+    <div class="acts"><button onclick="act('${d.key}','✓ Done')">${primary}</button>${secondary?`<button class="sec" onclick="act('${d.key}','→ Assigned to reception')">${secondary}</button>`:""}</div>
+    <div class="status"><span></span>${SUGGEST_KEYS.includes(d.cat)?`<button class="teach" onclick="teach('${d.cat}','${d.name}')">✦ Teach Jade next time</button>`:""}</div></div>`;
 }
 $("doNow").innerHTML = doNow.map(d=>cardHTML(d,d.primary,"Delegate")).join("");
 $("delegate").innerHTML = delegate.map(d=>cardHTML(d,"Assign to reception",null)).join("");
@@ -448,16 +453,16 @@ const naCalls = calls.filter(c=>c.outcome==="no_availability");
 const naPeople = new Set(naCalls.map(c=>c.caller_number)).size;
 $("insight").innerHTML = `<b>💡 Pattern:</b> ${naCalls.length} calls from ${naPeople} people couldn't get a suitable slot — mostly for Monday/Tuesday. Early-week demand is beating capacity. Consider an extra early-week session or letting Jade run an automatic waitlist that fills cancellations instantly.`;
 
-function updateProgress(){ $("kNeed").innerHTML = `${totalActions-done.size}<small>human actions remaining</small>`; $("kUrgent").innerHTML = `${doNow.filter(d=>!done.has(d.key)).length}<small>within remaining actions</small>`; }
+function updateProgress(){ $("kNeed").innerHTML = `${totalActions-done.size}<small>for you and reception</small>`; $("kUrgent").innerHTML = `${doNow.filter(d=>!done.has(d.key)).length}<small>need you now</small>`; }
 updateProgress();
 
 function act(key,label){
   const el=$("k-"+key); if(!el) return;
-  el.classList.add("done"); el.querySelector(".status").textContent=label; done.add(key); updateProgress();
+  el.classList.add("done"); el.querySelector(".status span").textContent=label; done.add(key); updateProgress();
 }
 function offer(i){
   const el=$("k-slot"+i); if(el.classList.contains("done")) return;
-  el.classList.add("done"); el.querySelector(".go span").textContent="✓ SMS offer sent"; done.add("slot"+i); updateProgress();
+  el.classList.add("done"); el.querySelector(".go span").textContent="✓ SMS offer sent"; done.add("slot"+i); updateProgress(); if(typeof renderRules==="function") renderRules();
 }
 $("offerAll").onclick = () => { matches.forEach((_,i)=>offer(i)); say([{text:`Done. I've sent slot offers to ${listNames(matches.map(m=>m.who.name))}. I'll confirm as they reply.`}]); };
 const listNames = a => a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a.at(-1);
@@ -467,14 +472,15 @@ function buildSummary(){
   const u = doNow.find(d=>d.tag[0]==="URGENT"), cmp = doNow.find(d=>d.tag[0]!=="URGENT");
   const um = matches.find(m=>m.who.rank===0), rest = matches.filter(m=>m.who.rank!==0);
   let s = `Good morning. Over the weekend I answered all ${calls.length} calls and booked ${booked.length} appointments, including ${newPatients.length} new patients. Two things need you before eight thirty. `;
-  if(u) s += `${u.name} called overnight in significant pain${um?` — ${um.slot.from}'s cancelled ${hm(um.slot.time)} with ${doc(um.slot.practitioner)} today is free, so offer it to him`:""}. `;
+  if(u) s += `${u.name} called overnight and was flagged urgent${um?` — ${um.slot.from}'s cancelled ${hm(um.slot.time)} with ${doc(um.slot.practitioner)} today is free, so offer it to him`:""}. `;
   if(cmp) s += `${cmp.name} has called ${cmp.calls.length===2?"twice":cmp.calls.length+" times"} about a billing dispute with no callback yet. `;
   if(rest.length) s += `Two more cancellations can go to ${listNames(rest.map(m=>m.who.name))}, who couldn't get in. `;
   s += `Reception can handle ${delegate.length} follow-ups. Everything else is done.`;
   return s;
 }
 const SUMMARY = buildSummary();
-$("jadeText").textContent = SUMMARY;
+const SHORT = `Jade booked ${booked.length} appointments and resolved most enquiries. ${doNow.length} issues need your attention now.`;
+$("jadeText").textContent = SHORT;
 
 /* ================= FULL BRIEFING (per-card, highlights as it speaks) ================= */
 function buildBriefing(){
@@ -517,14 +523,13 @@ function say(queue, label="Jade"){
 }
 $("stopBtn").onclick=()=>{ speechSynthesis.cancel(); clearHighlight(); $("avatar").classList.remove("talking"); $("stopBtn").style.display="none"; };
 
-$("askBtn").onclick=()=>{ $("jadeText").textContent=SUMMARY+`  (${SUMMARY.split(/\s+/).length} words)`; say([{text:SUMMARY}],"Jade · summary"); };
+$("askBtn").onclick=()=>{ $("jadeText").textContent=SHORT; say([{text:SUMMARY}],"Jade · summary"); };
 $("briefBtn").onclick=()=>{ say(buildBriefing(),"Jade · full briefing"); };
 
 
 /* ================= TEACH JADE ================= */
 // Owner turns a decision into a standing rule; Jade applies it next weekend, so the Monday list shrinks.
 const SUGGEST = {
-  urgent:   {label:"Urgent pain calls", rule:"If a patient calls in pain, offer them the earliest cancelled or free slot and text them to confirm. Only escalate to me if there's swelling, bleeding or trauma."},
   complaint:{label:"Billing disputes", rule:"For billing disputes, text the practice manager straight away with the caller's details, and tell the caller they'll hear back within 2 business hours."},
   slot:     {label:"Cancellations", rule:"When someone cancels, automatically offer the slot by SMS to the waitlist, most urgent first. The first person to reply YES gets it."},
   rebook:   {label:"Rebook requests", rule:"If someone cancels and asks to rebook, text them three available times the next business morning."},
@@ -535,6 +540,7 @@ const SUGGEST = {
 const allItems = [...doNow.map(d=>d.cat), ...matches.map(()=>"slot"), ...delegate.map(d=>d.cat)];
 let rules = {};
 try { rules = JSON.parse(localStorage.getItem("jadeRules")||"{}"); } catch(e) { rules = {}; }
+Object.keys(rules).forEach(k=>{ if(!SUGGEST[k]) delete rules[k]; }); // clinical escalations are never teachable
 const saveRules = () => { try { localStorage.setItem("jadeRules", JSON.stringify(rules)); } catch(e) {} };
 const coveredCount = (r=rules) => allItems.filter(c=>r[c]).length;
 
@@ -545,10 +551,10 @@ function renderRules(){
   $("nextBar").style.width = (coveredCount()/totalActions*100)+"%";
   $("ruleList").innerHTML = keys.length
     ? keys.map(k=>`<div class="rule"><span class="dotg">✦</span><span><b>${SUGGEST[k].label}:</b> ${rules[k]}</span><button title="Remove rule" onclick="forget('${k}')">×</button></div>`).join("")
-    : `<div class="norules">No rules yet. Tap <b>✦ Teach Jade</b> on any item.</div>`;
+    : `<div class="norules">No rules yet. Finish a task, then tap <b>✦ Teach Jade next time</b>. Urgent clinical calls always stay with you.</div>`;
   document.querySelectorAll("[data-cat]").forEach(el=>el.classList.toggle("is-learned", !!rules[el.dataset.cat]));
   $("resetRules").style.display = keys.length ? "inline" : "none";
-  $("teachSlots").style.display = rules.slot ? "none" : "block";
+  $("teachSlots").style.display = (rules.slot || !document.querySelector(".slot.done")) ? "none" : "block";
 }
 let teachCat = null;
 function teach(cat, from){
@@ -577,7 +583,7 @@ renderRules();
 function answer(q){
   q=q.toLowerCase();
   const names = a => listNames(a);
-  if(/urgent|emergenc|pain|first/.test(q)) return `The urgent one is ${doNow[0].name}. He called at 2:14am in significant pain. ${matches[0]?`${matches[0].slot.from}'s ${hm(matches[0].slot.time)} slot today is free for him.`:""}`;
+  if(/urgent|emergenc|pain|first/.test(q)) return `The urgent one is ${doNow[0].name}. He called at 2:14am and was flagged urgent. ${matches[0]?`${matches[0].slot.from}'s ${hm(matches[0].slot.time)} slot today is free for him.`:""}`;
   if(/complain|billing|invoice|angry|michael|upset/.test(q)){const c=doNow.find(d=>d.tag[0]!=="URGENT"); return `${c.name} has called ${c.calls.length} times disputing an invoice. He wants the practice manager to call and hasn't heard back since Friday.`;}
   if(/cancel/.test(q)) return `${freed.length} cancellations: ${freed.map(s=>`${s.from} on ${day(s.date)} at ${hm(s.time)}`).join("; ")}. I've matched each freed slot to someone who couldn't get in.`;
   if(/slot|free|gap|fill|waitlist|wait list/.test(q)) return matches.map(m=>`${day(m.slot.date)} ${hm(m.slot.time)} to ${m.who.name}`).join("; ")+". Tap send all offers and I'll text them.";
